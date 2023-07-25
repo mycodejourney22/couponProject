@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      resources :coupons, only: [:create, :index]
+      get 'coupons/search', to: 'coupons#search', as: 'search_coupons'
+    end
+  end
+  get '*path', to: 'pages#index', via: :all
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
+  root "pages#index"
 end
