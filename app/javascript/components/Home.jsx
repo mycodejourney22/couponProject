@@ -25,7 +25,7 @@ export default () => {
   function handleSearch() {
     axios.get(`/api/v1/coupons/search?discount_code=${formData.params}`)
       .then((res) => {
-        console.log('Status Code:', res.status);
+        console.log('Status Code:', res.data);
         return setSearchResult(res.data)
       })
       .catch((err) => {
@@ -71,13 +71,15 @@ export default () => {
             <table className="table">
               <thead>
                 <tr>
-                  <th scope="col" colSpan={2}>Discount Code</th>
+                  <th scope="col">Discount Code</th>
+                  <th scope="col">First Name</th>
                   <th scope="col">Active</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td colSpan={2}>{searchResult.discount_code}</td>
+                  <td>{searchResult.discount_code}</td>
+                  <td>{searchResult.first_name}</td>
                   <td>{!searchResult.isUsed ? "Valid" : "Expired"}</td>
                 </tr>
               </tbody>

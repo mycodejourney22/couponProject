@@ -5,6 +5,7 @@ class Api::V1::CouponsController < ApplicationController
   def create
     @coupon = Coupon.new(coupon_params)
     if @coupon.save
+      NotifierMailer.coupon_notifier.deliver_later
       render json: @coupon
     else
       render json: @coupon.errors
@@ -46,6 +47,6 @@ class Api::V1::CouponsController < ApplicationController
 
   def coupon_params
     params.require(:coupon).permit(:discount_code, :description, :valid_from, :valid_until, :coupon_type, :redemption_limit,
-                                  :percentage, :isUsed)
+                                  :percentage, :isUsed, :email, :first_name, :last_name, :phone_number)
   end
 end

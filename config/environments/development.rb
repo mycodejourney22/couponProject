@@ -7,6 +7,9 @@ Rails.application.configure do
   # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
+  # config.hosts << "e325-2a02-c7c-e37c-fc00-a861-1cfd-409e-b654.ngrok-free.app"
+  config.hosts << "localhost"
+  config.hosts << "19ee-2a02-c7c-e37c-fc00-24a7-94ba-5e92-31.ngrok-free.app"
 
   # Do not eager load code on boot.
   config.eager_load = false
@@ -40,12 +43,15 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
   # Raise exceptions for disallowed deprecations.
   config.active_support.disallowed_deprecation = :raise
+
 
   # Tell Active Support which deprecation messages to disallow.
   config.active_support.disallowed_deprecation_warnings = []
