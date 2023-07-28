@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from "react-router-dom"
+import { validateform } from '../Utility/Error';
 import axios from 'axios'
 
 export default function CouponForm() {
   const [couponCode, setCouponCode] = useState('');
   const navigate = useNavigate()
+  const [errors, setErrors] = React.useState({})
 
   const [formData, setFormData] = useState({
     discount_code: couponCode,
@@ -40,7 +42,7 @@ export default function CouponForm() {
     })
   }
 
-  console.log(couponCode)
+
 
   const today = new Date().toISOString().split('T')[0];
 
@@ -51,20 +53,25 @@ export default function CouponForm() {
 
   function handleSubmit(event) {
     event.preventDefault()
-    const submitData = new FormData()
-    submitData.append('coupon[discount_code]', couponCode)
-    submitData.append('coupon[description]', formData.description)
-    // submitData.append('coupon[redemption_limit]', formData.redemption_limit)
-    submitData.append('coupon[coupon_type]', formData.coupon_type)
-    submitData.append('coupon[percentage]', formData.percentage)
-    submitData.append('coupon[valid_from]', formData.valid_from)
-    submitData.append('coupon[valid_until]', formData.valid_until)
-    submitData.append('coupon[email]', formData.email)
-    submitData.append('coupon[first_name]', formData.first_name)
-    submitData.append('coupon[last_name]', formData.last_name)
-    submitData.append('coupon[phone_number]', formData.phone_number)
-    submitToApi(submitData)
-    navigate('/')
+    if (validateform(errors, setErrors, formData)) {
+      const submitData = new FormData()
+      submitData.append('coupon[discount_code]', couponCode)
+      submitData.append('coupon[description]', formData.description)
+      // submitData.append('coupon[redemption_limit]', formData.redemption_limit)
+      submitData.append('coupon[coupon_type]', formData.coupon_type)
+      submitData.append('coupon[percentage]', formData.percentage)
+      submitData.append('coupon[valid_from]', formData.valid_from)
+      submitData.append('coupon[valid_until]', formData.valid_until)
+      submitData.append('coupon[email]', formData.email)
+      submitData.append('coupon[first_name]', formData.first_name)
+      submitData.append('coupon[last_name]', formData.last_name)
+      submitData.append('coupon[phone_number]', formData.phone_number)
+      submitToApi(submitData)
+      navigate('/')
+    }
+    else {
+      console.log(errors)
+    }
   }
 
   function submitToApi(formData) {
@@ -91,7 +98,7 @@ export default function CouponForm() {
             <form onSubmit={handleSubmit} >
               <div className="row">
                 <div className="col">
-                  <label for="description" className="form-label fw-semibold">First Name</label>
+                  <label htmlFor="description" className="form-label fw-semibold">First Name</label>
                   <input
                     type="text"
                     placeholder="First Name"
@@ -99,9 +106,11 @@ export default function CouponForm() {
                     name="first_name"
                     value={formData.first_name}
                     className='form-control'
-                  /></div>
+                  />
+                  {errors.first_name && <span className='text-danger'>{errors.first_name}</span>}
+                </div>
                 <div className="col">
-                  <label for="description" className="form-label fw-semibold">Last Name</label>
+                  <label htmlFor="description" className="form-label fw-semibold">Last Name</label>
                   <input
                     type="text"
                     placeholder="Last Name"
@@ -109,10 +118,12 @@ export default function CouponForm() {
                     name="last_name"
                     value={formData.last_name}
                     className='form-control'
-                  /></div></div><br></br>
+                  />
+                  {errors.last_name && <span className='text-danger'>{errors.last_name}</span>}
+                </div></div><br></br>
               <div className="row">
                 <div className="col">
-                  <label for="description" className="form-label fw-semibold">Email address</label>
+                  <label htmlFor="description" className="form-label fw-semibold">Email address</label>
                   <input
                     type="email"
                     placeholder="Email address"
@@ -120,9 +131,11 @@ export default function CouponForm() {
                     name="email"
                     value={formData.email}
                     className='form-control'
-                  /></div>
+                  />
+                  {errors.email && <span className='text-danger'>{errors.email}</span>}
+                </div>
                 <div className="col">
-                  <label for="description" className="form-label fw-semibold">Phone number</label>
+                  <label htmlFor="description" className="form-label fw-semibold">Phone number</label>
                   <input
                     type="text"
                     placeholder="Phone number"
@@ -130,20 +143,24 @@ export default function CouponForm() {
                     name="phone_number"
                     value={formData.phone_number}
                     className='form-control'
-                  /></div>
+                  />
+                  {errors.phone_number && <span className='text-danger'>{errors.phone_number}</span>}
+                </div>
               </div><br></br>
               <div className="row">
                 <div className="col">
-                  <label for="discount_code" className="form-label fw-semibold">Discount Code</label>
+                  <label htmlFor="discount_code" className="form-label fw-semibold">Discount Code</label>
                   <input
                     className="form-control"
                     type="text"
                     placeholder="Discount Code"
                     name="discount_code"
                     value={couponCode}
-                  /></div>
+                  />
+                  {errors.discount_code && <span className='text-danger'>{errors.discount_code}</span>}
+                </div>
                 <div className="col">
-                  <label for="description" className="form-label fw-semibold">Description</label>
+                  <label htmlFor="description" className="form-label fw-semibold">Description</label>
                   <select
                     type="text"
                     placeholder="description"
@@ -158,10 +175,12 @@ export default function CouponForm() {
                     <option value="Maternity Shoot">Maternity Shoot</option>
                     <option value="Personal Shoot">Personal Shoot</option>
                     <option value="Other">Other</option>
-                  </select></div></div><br></br>
+                  </select>
+                  {errors.description && <span className='text-danger'>{errors.description}</span>}
+                </div></div><br></br>
               <div className='row'>
                 <div className='col'>
-                  <label for="valid_from" className="form-label fw-semibold">Valid from</label>
+                  <label htmlFor="valid_from" className="form-label fw-semibold">Valid from</label>
                   <input
                     type="date"
                     placeholder="Valid from"
@@ -170,9 +189,11 @@ export default function CouponForm() {
                     value={formData.valid_from}
                     min={today}
                     className='form-control'
-                  /></div>
+                  />
+                  {errors.valid_from && <span className='text-danger'>{errors.valid_from}</span>}
+                </div>
                 <div className='col'>
-                  <label for="valid_until" className="form-label fw-semibold">Expiry Date</label>
+                  <label htmlFor="valid_until" className="form-label fw-semibold">Expiry Date</label>
                   <input
                     type="date"
                     placeholder="Expiry Date"
@@ -182,7 +203,9 @@ export default function CouponForm() {
                     min={today}
                     max={maxDate}
                     className='form-control'
-                  /></div></div>
+                  />
+                  {errors.valid_until && <span className='text-danger'>{errors.valid_until}</span>}
+                </div></div>
               <br></br>
               <div className='row'>
                 <div className='col'>
@@ -201,6 +224,7 @@ export default function CouponForm() {
                     <option value="Christmas Shoot Special">Christmas Shoot Special</option>
                     <option value="Wednesday Special">Wednesday Special</option>
                   </select>
+                  {errors.coupon_type && <span className='text-danger'>{errors.coupon_type}</span>}
                 </div>
                 {/* <div className='col'>
                   <label for="percentage" className="form-label fw-semibold">Percentage discounted</label>
@@ -227,6 +251,7 @@ export default function CouponForm() {
                     <option value="10 percent">10 percent</option>
                     <option value="20 percent">20 percent</option>
                   </select>
+                  {errors.percentage && <span className='text-danger'>{errors.percentage}</span>}
                 </div>
               </div><br></br>
               {/* <label for="redemption_limit" className="form-label fw-semibold">Limit</label>
