@@ -6,24 +6,10 @@
 <p>Thank you for patronizing us at 363 Photography.</p>
 <p>As a token , we are giving you  <%= @Coupon.percentage %> one time Coupon that you can use for your next shoot or share with your family & friends</p>
 <p>Please find the coupon details below</p>
-<table class="table table-bordered border-primary">
-  <thead>
-    <tr>
-      <th scope="col">Discount Code</th>
-      <th scope="col">Valid From</th>
-      <th scope="col">Expiry Date</th>
-      <th scope="col">Percentage discount</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= @Coupon.discount_code %></td>
-      <td><%= @Coupon.valid_from %></td>
-      <td><%= @Coupon.valid_until %></td>
-      <td><%= @Coupon.percentage %></td>
-    </tr>
-  </tbody>
-</table>
+<p class="fw-semibold">Discount Code: <%= @Coupon.discount_code %></p>
+<p class="fw-semibold">Valid From: <%= @Coupon.valid_from %></p>
+<p class="fw-semibold">Valid Until: <%= @Coupon.valid_until %></p>
+<p class="fw-semibold">Percentage Discounted: <%= @Coupon.percentage %></p>
 
 <p>We are looking forward to having you again.</p>
 <p>363 Photography Team</p>

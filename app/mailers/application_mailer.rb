@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "info@363photography.org"
+  default from: "363 Photography<info@363photography.org>"
   layout "mailer"
 end
