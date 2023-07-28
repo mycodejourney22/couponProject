@@ -7,7 +7,8 @@ class NotifierMailer < ApplicationMailer
   #
   def coupon_notifier
     @greeting = "Hi"
+    @Coupon = Coupon.last
 
-    mail to: Coupon.all.pluck(:email), subject: "DISCOUNT CARD FOR YOUR NEXT PHOTOSHOOT"
+    mail to: Coupon.last.email, subject: "DISCOUNT CARD FOR YOUR NEXT PHOTOSHOOT"
   end
 end

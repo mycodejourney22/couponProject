@@ -1,5 +1,29 @@
-<h1>Notifier#coupon_notifier</h1>
 
 <p>
-  <%= @greeting %>, find me in app/views/notifier_mailer/coupon_notifier.html.erb
+  Hi <%= @Coupon.first_name %>,
 </p>
+
+<p>Thank you for patronizing us at 363 Photography.</p>
+<p>As a token , we are giving you  <%= @Coupon.percentage %> one time Coupon that you can use for your next shoot or share with your family & friends</p>
+<p>Please find the coupon details below</p>
+<table class="table table-bordered border-primary">
+  <thead>
+    <tr>
+      <th scope="col">Discount Code</th>
+      <th scope="col">Valid From</th>
+      <th scope="col">Expiry Date</th>
+      <th scope="col">Percentage discount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @Coupon.discount_code %></td>
+      <td><%= @Coupon.valid_from %></td>
+      <td><%= @Coupon.valid_until %></td>
+      <td><%= @Coupon.percentage %></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We are looking forward to having you again.</p>
+<p>363 Photography Team</p>
