@@ -34,6 +34,7 @@ gem 'coupon_code'
 group :development do
   gem 'letter_opener_web', '~> 2.0'
 end
+gem "devise"
 
 
 # Use Redis adapter to run Action Cable in production
