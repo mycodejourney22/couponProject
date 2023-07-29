@@ -1,3 +1,32 @@
-Notifier#coupon_notifier
+<div class="container lh-lg">
+  <div class='bg-dark rounded d-flex justify-content-center align-items-center'>
+    <img class="w-25 my-3" src="https://363photography.org/wp-content/uploads/2023/01/363-Logo-1024x512n.png" alt="363 Photography">
+  </div>
+ <div class='bg-light-subtle mt-4 p-5 rounded'>
+    <p>
+      Dear <%= @Coupon.first_name %>,
+    </p>
 
-<%= @greeting %>, find me in app/views/notifier_mailer/coupon_notifier.text.erb
+    <p>We extend our heartfelt gratitude for choosing 363 Photography as your preferred photography service.</p> <p> As a gesture of appreciation, we are thrilled to present you with a one-time coupon <span class='' style="background-color: #EEEE22">offering <%= @Coupon.percentage %> discount</span>, redeemable for your next photoshoot or to be shared with your beloved family and friends 👨‍👩‍👧‍👦.</p>
+
+    <p class='mb-0'>Below are the details of your exclusive coupon:</p>
+    <div class='p-4 rounded' style="background-color: #EEEE22; width: max-content">
+      <ul style='padding: 0; margin:0'>
+        <li><strong>Discount Code:</strong> <%= @Coupon.discount_code %></li>
+       <li><strong>Valid From:</strong> <%= @Coupon.valid_from.strftime('%B %e, %Y') %></li>
+       <li><strong>Valid Until:</strong> <%= @Coupon.valid_until.strftime('%B %e, %Y') %></li>
+        <li><strong>Percentage Discounted:</strong> <%= @Coupon.percentage %></li>
+      </ul>
+    </div>
+
+    <p>We are genuinely excited about the prospect of serving you again, capturing more precious moments, and turning them into cherished memories.</p>
+
+    <p>Should you have any questions or require any assistance, please do not hesitate to reach out to our team.</p>
+
+    <p>Warmest regards,<br>
+    363 Photography Team <br>
+    Ajah-Studio 09081753000 <br>
+    Surulere-Studio 07048891715<br>
+    Ikeja-Studio 09159744437</p>
+ </div>
+</div>
