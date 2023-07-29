@@ -9,6 +9,6 @@ class NotifierMailer < ApplicationMailer
     @greeting = "Hi"
     @Coupon = Coupon.last
 
-    mail to: Coupon.last.email, subject: "Discount card for your next Photoshoot with us 💖💖"
+    mail to: Coupon.last.email, subject: "Hi #{Coupon.last.first_name}, Discount card for your next Photoshoot with us 💖💖"
   end
 end

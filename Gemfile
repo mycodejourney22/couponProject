@@ -31,7 +31,9 @@ gem "cssbundling-rails"
 gem "jbuilder"
 
 gem 'coupon_code'
-gem "letter_opener", group: :development
+group :development do
+  gem 'letter_opener_web', '~> 2.0'
+end
 
 
 # Use Redis adapter to run Action Cable in production
