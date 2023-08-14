@@ -1,4 +1,5 @@
 class Api::V1::CouponsController < ApplicationController
+  before_action :authenticate_request
   protect_from_forgery with: :null_session
 
 
@@ -48,5 +49,21 @@ class Api::V1::CouponsController < ApplicationController
   def coupon_params
     params.require(:coupon).permit(:discount_code, :description, :valid_from, :valid_until, :coupon_type, :redemption_limit,
                                   :percentage, :isUsed, :email, :first_name, :last_name, :phone_number)
+  end
+
+  def authenticate_request
+    header = request.headers['Authorization']
+    token = header.split(' ').last if header
+
+    begin
+      decoded_token = JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
+      payload = decoded_token.first
+
+      user_id = payload['user_id'] # Extract user_id from payload
+
+      # Now you can use user_id to identify the user and perform further authorization checks
+    rescue JWT::DecodeError => e
+      render json: { error: 'Unauthorized' }, status: :unauthorized
+    end
   end
 end
