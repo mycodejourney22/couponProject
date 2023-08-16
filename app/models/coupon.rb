@@ -7,5 +7,6 @@ class Coupon < ApplicationRecord
   validates :valid_until, presence: true
   validates :email, presence: true
   validates :first_name, presence: true
+  belongs_to :user
 
 end

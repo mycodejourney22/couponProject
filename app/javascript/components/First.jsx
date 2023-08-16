@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios'
 
-export default function First() {
+export default function First({ userId, setUserId }) {
   const [formData, setFormData] = useState({
     params: ""
   })
@@ -10,12 +10,14 @@ export default function First() {
 
   const [searchResult, setSearchResult] = useState(null)
   const [status, setStatus] = useState(null)
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const [token, setToken] = useState(localStorage.getItem('token') || '');
+  const navigate = useNavigate()
 
 
 
   function handleChange(event) {
+
     const { name, value, type, checked } = event.target
     setFormData(prevFormData => {
       return {
@@ -49,7 +51,7 @@ export default function First() {
         }
       })
       .then((response) => {
-        // Assuming your Rails API returns the updated coupon in the response, you can update the state with it
+
         setSearchResult(response.data);
       })
       .catch((error) => {
@@ -57,11 +59,12 @@ export default function First() {
   }
 
 
-
   function handleSubmit(event) {
+
     event.preventDefault();
     handleSearch();
   }
+
 
 
 
@@ -135,6 +138,8 @@ export default function First() {
           <div className="container secondary-color">
             <h1 className="display-4">Welcome to E-Coupons</h1>
 
+
+
             <hr className="my-4" />
             <div className="mt-3">
               {status && <p className="danger-p">The discount code you enter is invalid</p>}
@@ -155,6 +160,7 @@ export default function First() {
             <h2 className="my-3 text-center">OR</h2>
             <Link
               to="/new"
+              state={{ userId: userId }}
               className="btn btn-lg custom-button w-100"
               role="button"
             >

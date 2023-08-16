@@ -1,9 +1,9 @@
 import axios from 'axios'
 import React from 'react'
 import { Link, useNavigate } from "react-router-dom"
+import jwt_decode from 'jwt-decode'
 
 export default function Login({ isAuthenticated, setToken }) {
-  // console.log(props)
   const [formData, setFormData] = React.useState({
     email: "",
     password: ""
@@ -12,7 +12,6 @@ export default function Login({ isAuthenticated, setToken }) {
 
   const navigate = useNavigate()
   const [errorMessage, setErrorMessage] = React.useState('');
-  // const [isAuthenticated, setIsAuthenticated] = React.useState(false);
 
   function handleChange(event) {
     const { name, value, type, checked } = event.target
@@ -41,7 +40,6 @@ export default function Login({ isAuthenticated, setToken }) {
       headers: {
         "Content-Type": "application/json",
         'X-Requested-With': 'XMLHttpRequest'
-        // 'X-CSRF-Token': token
       }
     })
       .then((res) => {

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useLocation } from "react-router-dom"
 import { validateform } from '../Utility/Error';
 import axios from 'axios'
 import Login from '../Utility/Login'
-import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 
 export default function CouponForm() {
   const [couponCode, setCouponCode] = useState('');
@@ -12,6 +10,13 @@ export default function CouponForm() {
   const [errors, setErrors] = React.useState({})
   const [token, setToken] = useState(localStorage.getItem('token') || '')
   const isAuthenticated = !!token
+
+  const location = useLocation()
+
+  if (location.state) {
+    const { userId } = location.state
+  }
+
 
   const [formData, setFormData] = useState({
     discount_code: couponCode,
@@ -25,6 +30,7 @@ export default function CouponForm() {
     last_name: "",
     phone_number: ""
   })
+
 
 
 
@@ -85,14 +91,16 @@ export default function CouponForm() {
   }
 
   function submitToApi(formData) {
-    axios.post('/api/v1/coupons', formData
-      , {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
+    axios.post('/api/v1/coupons', formData, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      params: {
+        user_id: userId
+      }
+    })
       .then((res) => console.log(res.data))
-      .catch((err) => console.error(err))
+      .catch((err) => console.error(err));
   }
 
 
