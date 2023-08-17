@@ -39,7 +39,8 @@ export default function Login({ isAuthenticated, setToken }) {
       requestBodyJSON, {
       headers: {
         "Content-Type": "application/json",
-        'X-Requested-With': 'XMLHttpRequest'
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-Token': token
       }
     })
       .then((res) => {
