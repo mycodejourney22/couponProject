@@ -1,6 +1,6 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'http://localhost:3001' # Change this to the allowed origin(s), e.g., 'https://yourfrontenddomain.com'
+    origins 'http://localhost:3001', 'https://easycoupon-457fabb49cbb.herokuapp.com/' # Change this to the allowed origin(s), e.g., 'https://yourfrontenddomain.com'
     resource '*',
       headers: :any,
       methods: [:get, :post, :put, :patch, :delete, :options, :head],
