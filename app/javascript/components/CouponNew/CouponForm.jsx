@@ -10,14 +10,18 @@ export default function CouponForm() {
   const [errors, setErrors] = React.useState({})
   const [token, setToken] = useState(localStorage.getItem('token') || '')
   const isAuthenticated = !!token
+  const [user, setUser] = useState("")
 
   const location = useLocation()
 
-  console.log(location.state.userId)
 
-  if (location.state) {
-    const { userId } = location.state
-  }
+
+
+  useEffect(() => {
+    if (location.state) {
+      setUser(location.state.userId)
+    }
+  }, [])
 
 
   const [formData, setFormData] = useState({
@@ -33,6 +37,7 @@ export default function CouponForm() {
     phone_number: ""
   })
 
+  // console.log(userId)
 
 
 
@@ -73,7 +78,9 @@ export default function CouponForm() {
 
   function handleSubmit(event) {
     event.preventDefault()
-    if (validateform(errors, setErrors, formData)) {
+    console.log("I am user" + user)
+    console.log(formData)
+    if (validateform(setErrors, formData)) {
       const submitData = new FormData()
       submitData.append('coupon[discount_code]', couponCode)
       submitData.append('coupon[description]', formData.description)
@@ -100,7 +107,7 @@ export default function CouponForm() {
         Authorization: `Bearer ${token}`
       },
       params: {
-        user_id: location.state.userId
+        user_id: '4'
       }
     })
       .then((res) => console.log(res.data))

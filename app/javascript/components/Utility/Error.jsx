@@ -1,6 +1,7 @@
-export const validateform = (errors, setErrors, formData) => {
+export const validateform = (setErrors, formData) => {
   const { first_name, last_name, email, phone_number, discount_code, description, valid_from, valid_until, coupon_type, percentage } = formData;
 
+  let errors = {}
 
   if (!first_name) {
     errors = { ...errors, first_name: 'First Name is required' }

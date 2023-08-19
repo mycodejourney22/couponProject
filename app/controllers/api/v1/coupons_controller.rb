@@ -58,7 +58,12 @@ class Api::V1::CouponsController < ApplicationController
     token = header.split(' ').last if header
 
     begin
-      decoded_token = JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
+      if Rails.env.production?
+        decoded_token = JWT.decode(token, ENV['devise_jwt_secret_key'], true, algorithm: 'HS256')
+      else
+        decoded_token = JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
+      end
+      # decoded_token = JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
       payload = decoded_token.first
 
       payload['user_id'] # Extract user_id from payload
