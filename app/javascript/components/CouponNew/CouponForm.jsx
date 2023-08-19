@@ -23,14 +23,24 @@ export default function CouponForm() {
     }
   }, [])
 
+  const today = new Date().toISOString().split('T')[0];
+
+  const oneYearLater = new Date();
+  oneYearLater.setFullYear(oneYearLater.getFullYear() + 1);
+  const maxDate = oneYearLater.toISOString().split('T')[0];
+
+  const threeMonths = new Date();
+  threeMonths.setMonth(threeMonths.getMonth() + 3);
+  const formattedThreeMonthsDate = threeMonths.toISOString().split('T')[0];
+
 
   const [formData, setFormData] = useState({
     discount_code: couponCode,
     description: "",
     coupon_type: "",
     percentage: "",
-    valid_from: "",
-    valid_until: "",
+    valid_from: today,
+    valid_until: formattedThreeMonthsDate,
     email: "",
     first_name: "",
     last_name: "",
@@ -65,13 +75,6 @@ export default function CouponForm() {
   }
 
 
-
-
-  const today = new Date().toISOString().split('T')[0];
-
-  const oneYearLater = new Date();
-  oneYearLater.setFullYear(oneYearLater.getFullYear() + 1);
-  const maxDate = oneYearLater.toISOString().split('T')[0];
 
 
   function handleSubmit(event) {
@@ -226,6 +229,7 @@ export default function CouponForm() {
                       placeholder="Valid from"
                       onChange={handleChange}
                       name="valid_from"
+                      defaultValue={today}
                       value={formData.valid_from}
                       min={today}
                       className='form-control'
@@ -240,6 +244,7 @@ export default function CouponForm() {
                       onChange={handleChange}
                       name="valid_until"
                       value={formData.valid_until}
+                      defaultValue={formattedThreeMonthsDate}
                       min={today}
                       max={maxDate}
                       className='form-control'

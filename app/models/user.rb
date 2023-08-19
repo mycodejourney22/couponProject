@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   include Devise::JWT::RevocationStrategies::JTIMatcher
   validates :email, presence: true
+  validates :email, uniqueness: true
   validates :password, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
