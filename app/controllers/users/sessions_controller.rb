@@ -11,13 +11,13 @@ class Users::SessionsController < Devise::SessionsController
     if user
       sign_in(user)
       payload = { user_id: user.id }
-      token = JWT.encode(payload, Rails.application.secrets.secret_key_base)
-      # if Rails.env.production?
-      #   secret_key = ENV['devise_jwt_secret_key']
-      # else
-      #   secret_key = Rails.application.secrets.secret_key_base
-      # end
-      # token = JWT.encode(payload, secret_key)
+      # token = JWT.encode(payload, Rails.application.secrets.secret_key_base)
+      if Rails.env.production?
+        secret_key = ENV['devise_jwt_secret_key']
+      else
+        secret_key = Rails.application.secrets.secret_key_base
+      end
+      token = JWT.encode(payload, secret_key)
       render json: { message: "Logged in successfully." , token: token}, status: :ok
     else
       render json: { error: 'Invalid email or password.' }, status: :unauthorized
