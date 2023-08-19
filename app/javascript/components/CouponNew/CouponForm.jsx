@@ -13,6 +13,8 @@ export default function CouponForm() {
 
   const location = useLocation()
 
+  console.log(location.state.userId)
+
   if (location.state) {
     const { userId } = location.state
   }
@@ -59,6 +61,8 @@ export default function CouponForm() {
   }
 
 
+  // console.log(userId)
+
 
   const today = new Date().toISOString().split('T')[0];
 
@@ -96,7 +100,7 @@ export default function CouponForm() {
         Authorization: `Bearer ${token}`
       },
       params: {
-        user_id: userId
+        user_id: location.state.userId
       }
     })
       .then((res) => console.log(res.data))
@@ -260,17 +264,6 @@ export default function CouponForm() {
                     </select>
                     {errors.coupon_type && <span className='text-danger'>{errors.coupon_type}</span>}
                   </div>
-                  {/* <div className='col'>
-                  <label for="percentage" className="form-label fw-semibold">Percentage discounted</label>
-                  <input
-                    type="text"
-                    placeholder="percentage"
-                    onChange={handleChange}
-                    name="percentage"
-                    value={formData.percentage}
-                    className='form-control'
-                  />
-                </div> */}
                   <div className="col">
                     <label htmlFor="percentage" className="form-label fw-semibold">Percentage discounted</label>
                     <br />
@@ -288,15 +281,7 @@ export default function CouponForm() {
                     {errors.percentage && <span className='text-danger'>{errors.percentage}</span>}
                   </div>
                 </div><br></br>
-                {/* <label for="redemption_limit" className="form-label fw-semibold">Limit</label>
-              <input
-                type="text"
-                placeholder="Limit"
-                onChange={handleChange}
-                name="redemption_limit"
-                value={formData.redemption_limit}
-                className='form-control'
-              /><br></br> */}
+
                 <button className="btn btn-lg custom-button w-100"
                   role="button">Submit</button>
               </form>

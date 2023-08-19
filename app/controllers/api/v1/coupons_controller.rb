@@ -42,7 +42,7 @@ class Api::V1::CouponsController < ApplicationController
     if @coupon.update(coupon_params)
       render json: @coupon
     else
-      render json: { error: "Failed to update coupon" }, status: :unprocessable_entity
+      render json: { error: 'Failed to update coupon' }, status: :unprocessable_entity
     end
   end
 
@@ -50,7 +50,7 @@ class Api::V1::CouponsController < ApplicationController
 
   def coupon_params
     params.require(:coupon).permit(:discount_code, :description, :valid_from, :valid_until, :coupon_type, :redemption_limit,
-                                  :percentage, :isUsed, :email, :first_name, :last_name, :phone_number, :user_id)
+                                   :percentage, :isUsed, :email, :first_name, :last_name, :phone_number, :user_id)
   end
 
   def authenticate_request
@@ -61,7 +61,7 @@ class Api::V1::CouponsController < ApplicationController
       decoded_token = JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256')
       payload = decoded_token.first
 
-      user_id = payload['user_id'] # Extract user_id from payload
+      payload['user_id'] # Extract user_id from payload
 
       # Now you can use user_id to identify the user and perform further authorization checks
     rescue JWT::DecodeError => e

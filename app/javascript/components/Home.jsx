@@ -10,7 +10,7 @@ export default () => {
   const [token, setToken] = useState(localStorage.getItem('token') || '')
   const isAuthenticated = !!token
   const [userId, setUserId] = useState(null)
-  const [timeoutId, setTimeoutId] = useState(null)
+  // const [timeoutId, setTimeoutId] = useState(null)
 
   // useEffect(() => {
 
@@ -53,23 +53,25 @@ export default () => {
       setUserId(decodedToken.user_id)
     }
 
-    const inactiveTimeout = 2 * 60 * 1000
-    const newTimeoutId = setTimeout(() => {
-      clearToken();
-    }, inactiveTimeout);
+    // const inactiveTimeout = 2 * 60 * 1000
+    // const newTimeoutId = setTimeout(() => {
+    //   clearToken();
+    // }, inactiveTimeout);
 
-    setTimeoutId(newTimeoutId)
+    // setTimeoutId(newTimeoutId)
 
-    return () => {
-      clearTimeout(timeoutId)
-    };
+    // return () => {
+    //   clearTimeout(timeoutId)
+    // };
 
   }, [token]); // Depend only on 'token'
 
-  const clearToken = () => {
-    localStorage.removeItem("token")
-    setToken("")
-  };
+  // const clearToken = () => {
+  //   localStorage.removeItem("token")
+  //   setToken("")
+  // };
+
+  // console.log(userId)
 
 
   if (!isAuthenticated) {
@@ -83,11 +85,13 @@ export default () => {
     )
   }
 
-  return (
-    <First
-      isAuthenticated={isAuthenticated}
-      userId={userId}
-      setUserId={setUserId}
-    />
-  )
+  else {
+    return (
+      <First
+        isAuthenticated={isAuthenticated}
+        userId={userId}
+        setUserId={setUserId}
+      />
+    )
+  }
 };

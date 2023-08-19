@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from 'axios'
 
 export default function First({ userId, setUserId }) {
@@ -7,17 +7,18 @@ export default function First({ userId, setUserId }) {
     params: ""
   })
 
+  console.log(userId)
 
   const [searchResult, setSearchResult] = useState(null)
   const [status, setStatus] = useState(null)
   // const navigate = useNavigate()
   const [token, setToken] = useState(localStorage.getItem('token') || '');
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
 
 
   function handleChange(event) {
-
+    console.log("YES")
     const { name, value, type, checked } = event.target
     setFormData(prevFormData => {
       return {
@@ -55,18 +56,16 @@ export default function First({ userId, setUserId }) {
         setSearchResult(response.data);
       })
       .catch((error) => {
+        console.error(error)
       });
   }
 
 
   function handleSubmit(event) {
-
+    console.log(event)
     event.preventDefault();
     handleSearch();
   }
-
-
-
 
 
 

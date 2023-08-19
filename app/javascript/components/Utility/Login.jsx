@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { Link, useNavigate } from "react-router-dom"
-import jwt_decode from 'jwt-decode'
+
 
 export default function Login({ isAuthenticated, setToken }) {
   const [formData, setFormData] = React.useState({
@@ -23,7 +23,10 @@ export default function Login({ isAuthenticated, setToken }) {
     })
   }
 
+
+
   function handleSubmit(e) {
+    console.log(e)
     e.preventDefault()
     const submitForm = new FormData()
     submitForm.append('email', formData.email)
@@ -39,13 +42,15 @@ export default function Login({ isAuthenticated, setToken }) {
       requestBodyJSON, {
       headers: {
         "Content-Type": "application/json",
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-Token': token
+        'X-Requested-With': 'XMLHttpRequest'
       }
     })
       .then((res) => {
+        console.log(res)
         if (res.data.message === 'Logged in successfully.') {
           setToken(res.data.token)
+          console.log(res.data.token)
+          console.log("YES")
           localStorage.setItem('token', res.data.token)
           navigate('/')
         } else {
