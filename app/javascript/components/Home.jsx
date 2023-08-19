@@ -11,6 +11,7 @@ export default () => {
   const [token, setToken] = useState(localStorage.getItem('token') || '')
   const isAuthenticated = !!token
   const [userId, setUserId] = useState(null)
+  const [firstName, setFirstName] = useState(null)
   const [timeoutId, setTimeoutId] = useState(null)
   const navigate = useNavigate()
 
@@ -53,6 +54,7 @@ export default () => {
     if (token) {
       const decodedToken = jwt_decode(token)
       setUserId(decodedToken.user_id)
+      setFirstName(decodedToken.first_name)
     }
 
     const inactiveTimeout = 2 * 60 * 1000
@@ -93,6 +95,7 @@ export default () => {
       <First
         isAuthenticated={isAuthenticated}
         userId={userId}
+        firstName={firstName}
         setUserId={setUserId}
       />
     )

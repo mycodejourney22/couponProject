@@ -10,7 +10,7 @@ class Users::SessionsController < Devise::SessionsController
     user = warden.authenticate(auth_options)
     if user
       sign_in(user)
-      payload = { user_id: user.id, exp: Time.now.to_i + 2.minutes }
+      payload = { user_id: user.id, exp: Time.now.to_i + 2.minutes, first_name: user.first_name }
       # token = JWT.encode(payload, Rails.application.secrets.secret_key_base)
       if Rails.env.production?
         secret_key = ENV['devise_jwt_secret_key']

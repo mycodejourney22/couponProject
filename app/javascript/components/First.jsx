@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios'
 
-export default function First({ userId, setUserId }) {
+export default function First({ userId, setUserId, firstName }) {
   const [formData, setFormData] = useState({
     params: ""
   })
@@ -132,10 +132,7 @@ export default function First({ userId, setUserId }) {
       <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center">
         <div className="jumbotron jumbotron-fluid bg-transparent w-100">
           <div className="container secondary-color">
-            <h1 className="display-4">Welcome to E-Coupons</h1>
-
-
-
+            <h1 className="display-4">Welcome {firstName}! --Ecoupon</h1>
             <hr className="my-4" />
             <div className="mt-3">
               {status && <p className="danger-p">The discount code you enter is invalid</p>}
