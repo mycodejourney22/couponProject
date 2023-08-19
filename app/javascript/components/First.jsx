@@ -7,7 +7,6 @@ export default function First({ userId, setUserId }) {
     params: ""
   })
 
-  console.log(userId)
 
   const [searchResult, setSearchResult] = useState(null)
   const [status, setStatus] = useState(null)
@@ -18,7 +17,6 @@ export default function First({ userId, setUserId }) {
 
 
   function handleChange(event) {
-    console.log("YES")
     const { name, value, type, checked } = event.target
     setFormData(prevFormData => {
       return {
@@ -62,7 +60,6 @@ export default function First({ userId, setUserId }) {
 
 
   function handleSubmit(event) {
-    console.log(event)
     event.preventDefault();
     handleSearch();
   }

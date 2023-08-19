@@ -37,7 +37,6 @@ export default function CouponForm() {
     phone_number: ""
   })
 
-  // console.log(userId)
 
 
 
@@ -66,7 +65,6 @@ export default function CouponForm() {
   }
 
 
-  // console.log(userId)
 
 
   const today = new Date().toISOString().split('T')[0];
@@ -78,8 +76,6 @@ export default function CouponForm() {
 
   function handleSubmit(event) {
     event.preventDefault()
-    console.log("I am user" + user)
-    console.log(formData)
     if (validateform(setErrors, formData)) {
       const submitData = new FormData()
       submitData.append('coupon[discount_code]', couponCode)
@@ -110,7 +106,6 @@ export default function CouponForm() {
         user_id: user
       }
     })
-      .then((res) => console.log(res.data))
       .catch((err) => console.error(err));
   }
 

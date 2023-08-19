@@ -26,7 +26,6 @@ export default function Login({ isAuthenticated, setToken }) {
 
 
   function handleSubmit(e) {
-    console.log(e)
     e.preventDefault()
     const submitForm = new FormData()
     submitForm.append('email', formData.email)
@@ -46,11 +45,8 @@ export default function Login({ isAuthenticated, setToken }) {
       }
     })
       .then((res) => {
-        console.log(res)
         if (res.data.message === 'Logged in successfully.') {
           setToken(res.data.token)
-          console.log(res.data.token)
-          console.log("YES")
           localStorage.setItem('token', res.data.token)
           navigate('/')
         } else {
