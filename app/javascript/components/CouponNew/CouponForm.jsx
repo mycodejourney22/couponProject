@@ -107,7 +107,7 @@ export default function CouponForm() {
         Authorization: `Bearer ${token}`
       },
       params: {
-        user_id: '4'
+        user_id: user
       }
     })
       .then((res) => console.log(res.data))
